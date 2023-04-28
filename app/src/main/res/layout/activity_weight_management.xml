@@ -1,78 +1,155 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/weightManagementLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/weightManagementTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Weight Management"
-        android:textSize="24sp" />
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/ageLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weightManagementTitle"
+        android:layout_marginTop="32dp"
+        android:text="Age"
+        android:textColor="#000000"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/ageEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titleTextView"
+        android:layout_below="@id/ageLabel"
+        android:inputType="number"
+        android:hint="Enter your age" />
+
+    <TextView
+        android:id="@+id/heightLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ageEditText"
         android:layout_marginTop="16dp"
-        android:hint="Age"
-        android:inputType="number" />
+        android:text="Height (cm)"
+        android:textColor="#000000"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/heightEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ageEditText"
+        android:layout_below="@id/heightLabel"
+        android:inputType="number"
+        android:hint="Enter your height" />
+
+    <TextView
+        android:id="@+id/weightLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/heightEditText"
         android:layout_marginTop="16dp"
-        android:hint="Height (in cm)"
-        android:inputType="numberDecimal" />
+        android:text="Weight (kg)"
+        android:textColor="#000000"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/weightEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/heightEditText"
-        android:layout_marginTop="16dp"
-        android:hint="Weight (in kg)"
-        android:inputType="numberDecimal" />
+        android:layout_below="@id/weightLabel"
+        android:inputType="numberDecimal"
+        android:hint="Enter your weight" />
 
     <TextView
-        android:id="@+id/goalTextView"
+        android:id="@+id/activityLevelLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/weightEditText"
         android:layout_marginTop="16dp"
-        android:text="Goal" />
+        android:text="Activity Level"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:id="@+id/activityLevelRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_below="@id/activityLevelLabel"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/sedentaryRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Sedentary" />
+
+        <RadioButton
+            android:id="@+id/lightlyActiveRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lightly Active" />
+
+        <RadioButton
+            android:id="@+id/veryActiveRadioButton"
+            android:layout_width="181dp"
+            android:layout_height="wrap_content"
+            android:text="Very Active" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/goalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activityLevelRadioGroup"
+        android:layout_marginTop="16dp"
+        android:text="Goal"
+        android:textColor="#000000"
+        android:textSize="18sp" />
 
     <RadioGroup
         android:id="@+id/goalRadioGroup"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/goalTextView"
-        android:layout_marginTop="8dp">
+        android:layout_below="@id/goalLabel"
+        android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/lossRadioButton"
+            android:id="@+id/loseWeightRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Weight Loss" />
+            android:text="Lose Weight"
+            android:checked="true" />
 
         <RadioButton
-            android:id="@+id/gainRadioButton"
+            android:id="@+id/maintainWeightRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Weight Gain" />
+            android:text="Maintain Weight" />
+
+        <RadioButton
+            android:id="@+id/gainWeightRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gain Weight" />
 
     </RadioGroup>
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/calculateButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/goalRadioGroup"
-        android:layout_marginTop="16dp"
-        android:text="Calculate" />
-
+        android:layout_marginTop="32dp"
+        android:text="Calculate"
+        android:textColor="#ffffff"
+        android:background="#000000" />
 </RelativeLayout>

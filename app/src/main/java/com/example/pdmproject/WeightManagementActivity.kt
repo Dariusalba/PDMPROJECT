@@ -9,40 +9,46 @@ import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 
 class WeightManagementActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weight_management)
 
-        val calculateButton = findViewById<Button>(R.id.submitButton)
+        val calculateButton: Button = findViewById(R.id.calculateButton)
 
         calculateButton.setOnClickListener {
+            val ageEditText: EditText = findViewById(R.id.ageEditText)
+            val heightEditText: EditText = findViewById(R.id.heightEditText)
+            val weightEditText: EditText = findViewById(R.id.weightEditText)
+            val activityLevelRadioGroup: RadioGroup = findViewById(R.id.activityLevelRadioGroup)
+            val goalRadioGroup: RadioGroup = findViewById(R.id.goalRadioGroup)
 
-            val goalRadioGroup = findViewById<RadioGroup>(R.id.goalRadioGroup)
-            val selectedGoalId = goalRadioGroup.checkedRadioButtonId
-            val selectedGoal = findViewById<RadioButton>(selectedGoalId).text.toString()
+            val age: Int = ageEditText.text.toString().toInt()
+            val height: Int = heightEditText.text.toString().toInt()
+            val weight: Double = weightEditText.text.toString().toDouble()
 
-
-            val ageEditText = findViewById<EditText>(R.id.ageEditText)
-            val age = ageEditText.text.toString().toInt()
-
-            val heightEditText = findViewById<EditText>(R.id.heightEditText)
-            val height = heightEditText.text.toString().toDouble()
-
-            val weightEditText = findViewById<EditText>(R.id.weightEditText)
-            val weight = weightEditText.text.toString().toDouble()
-
-            val dailyCalorieIntake = if (selectedGoal == "Weight Loss") {
-                (10 * weight) + (6.25 * height) - (5 * age) - 500
-            } else {
-                (10 * weight) + (6.25 * height) - (5 * age) + 500
+            val activityLevel: Double = when (activityLevelRadioGroup.checkedRadioButtonId) {
+                R.id.sedentaryRadioButton -> 1.2
+                R.id.lightlyActiveRadioButton -> 1.375
+                R.id.veryActiveRadioButton -> 1.725
+                else -> 1.2
             }
 
+            val goal: Double = when (goalRadioGroup.checkedRadioButtonId) {
+                R.id.loseWeightRadioButton -> -0.2
+                R.id.maintainWeightRadioButton -> 0.0
+                R.id.gainWeightRadioButton -> 0.2
+                else -> 0.0
+            }
+
+            val bmr: Double = calculateBMR(age, height, weight)
+            val dailyCalorieIntake: Int = (bmr * activityLevel * (1.0 + goal)).toInt()
+
             val intent = Intent(this, CalorieIntakeActivity::class.java)
-
-            intent.putExtra("DAILY_CALORIE_INTAKE", dailyCalorieIntake)
-
+            intent.putExtra("CALORIE_INTAKE", dailyCalorieIntake)
             startActivity(intent)
         }
+    }
+    private fun calculateBMR(age: Int, height: Int, weight: Double): Double {
+        return 10 * weight + 6.25 * height - 5 * age + 5
     }
 }

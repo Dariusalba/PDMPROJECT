@@ -11,7 +11,7 @@ class CalorieIntakeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calorie_intake)
 
-        val dailyCalorieIntake = intent.getDoubleExtra("DAILY_CALORIE_INTAKE", 0.0)
+        val dailyCalorieIntake = intent.getIntExtra("CALORIE_INTAKE", 0)
 
         val calorieIntakeTextView = findViewById<TextView>(R.id.calorieIntakeTextView)
 
