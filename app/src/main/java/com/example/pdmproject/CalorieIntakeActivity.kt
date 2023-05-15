@@ -30,7 +30,7 @@ class CalorieIntakeActivity : AppCompatActivity() {
                 dietRecommendationTextView.text = "Focus on low-calorie, nutrient-dense foods such as vegetables, fruits, lean protein sources, and whole grains. Aim for three meals and one or two snacks per day."
             }
             in 1500..1800 -> {
-                dietRecommendationTextView.text = "Similar to the above, but with slightly larger portions and potentially more variety in the types of foods included."
+                dietRecommendationTextView.text = "Focus on low-calorie, nutrient-dense foods such as vegetables, fruits, lean protein sources, and whole grains. Aim for three meals and one or two snacks per day, but with slightly larger portions and potentially more variety in the types of foods included."
             }
             in 1800..2200 -> {
                 dietRecommendationTextView.text = "At this level, there's more room for healthy fats, carbohydrates, and protein. Focus on eating a variety of whole foods and limiting processed foods."
@@ -43,9 +43,9 @@ class CalorieIntakeActivity : AppCompatActivity() {
             }
         }
 
-        // Set up the button to navigate to the DietRecommendationsActivity
         dietRecommendationButton.setOnClickListener {
             val intent = Intent(this, DietRecommendationsActivity::class.java)
+            intent.putExtra("CALORIE_INTAKE", dailyCalorieIntake);
             startActivity(intent)
         }
     }
