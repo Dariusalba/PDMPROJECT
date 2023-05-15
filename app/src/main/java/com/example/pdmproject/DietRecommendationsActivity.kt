@@ -59,6 +59,7 @@ class DietRecommendationsActivity : AppCompatActivity() {
         val addFoodButton: Button = findViewById(R.id.add_food_button)
         addFoodButton.setOnClickListener {
             val intent = Intent(this, AddFoodActivity::class.java)
+            intent.putExtra("CALORIE_INTAKE", calorieIntake)
             startActivity(intent)
         }
     }
