@@ -1,5 +1,6 @@
 package com.example.pdmproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -54,6 +55,11 @@ class DietRecommendationsActivity : AppCompatActivity() {
         val backButton: Button = findViewById(R.id.back_button)
         backButton.setOnClickListener {
             finish()
+        }
+        val addFoodButton: Button = findViewById(R.id.add_food_button)
+        addFoodButton.setOnClickListener {
+            val intent = Intent(this, AddFoodActivity::class.java)
+            startActivity(intent)
         }
     }
 }
