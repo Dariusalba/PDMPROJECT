@@ -1,18 +1,18 @@
-<!-- activity_main.xml -->
+<!-- activity_register.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/loginTitle"
+        android:id="@+id/registerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
-        android:text="Login"
+        android:text="Register"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/loginTitle"
+        android:layout_below="@id/registerTitle"
         android:layout_marginTop="16dp"
         android:hint="Username" />
 
@@ -34,18 +34,10 @@
         android:hint="Password" />
 
     <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/passwordEditText"
-        android:layout_marginTop="16dp"
-        android:text="Login" />
-
-    <Button
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/loginButton"
+        android:layout_below="@id/passwordEditText"
         android:layout_marginTop="16dp"
         android:text="Register" />
 

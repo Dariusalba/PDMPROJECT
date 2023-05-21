@@ -1,5 +1,6 @@
 package com.example.pdmproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -45,13 +46,26 @@ class AddFoodActivity : AppCompatActivity() {
             val resultText = "Total Calories: $totalCalories"
             caloriesResultTextView.text = resultText
         }
+
+
+        val bmiCalculatorButton: Button = findViewById(R.id.bmi_calculator_button)
+        bmiCalculatorButton.setOnClickListener {
+            val intent = Intent(this, BmiCalculatorActivity::class.java)
+            startActivity(intent)
+        }
+
+        val workoutPlanButton: Button = findViewById(R.id.workout_plan_button)
+        workoutPlanButton.setOnClickListener {
+            val intent = Intent(this, WorkoutPlanActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun calculateTotalCalories(): Int {
         var totalCalories = 0
 
         for (meal in mealsList) {
-            val caloriesPer100g = 100 // Example: Assume 100 calories per 100 grams of food
+            val caloriesPer100g = 230
             val calories = ((meal.second / 100) * caloriesPer100g).toInt()
             totalCalories += calories
         }
@@ -67,10 +81,9 @@ class AddFoodActivity : AppCompatActivity() {
             val warningMessage = "You are below your recommended daily calorie intake by $difference calories!"
             Toast.makeText(this, warningMessage, Toast.LENGTH_LONG).show()
         }
-
         return totalCalories
-    }
 
+    }
 
     private fun clearInputFields() {
         foodNameEditText.text.clear()

@@ -22,9 +22,6 @@ class DietRecommendationsActivity : AppCompatActivity() {
         // Log the value of calorieIntake
         Log.d("CalorieIntake", "Value: $calorieIntake")
 
-        // Display the value of calorieIntake in a Toast message
-        Toast.makeText(this, "Calorie Intake: $calorieIntake", Toast.LENGTH_SHORT).show()
-
         val dietRecommendations = when {
             calorieIntake in 1200..1500 -> "For a 1200-1500 calorie diet, try eating:\n\n" +
                     "- Breakfast: 1 cup oatmeal with 1/2 cup berries and 1 tbsp honey\n" +

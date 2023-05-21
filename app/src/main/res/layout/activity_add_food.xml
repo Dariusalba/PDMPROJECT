@@ -49,4 +49,20 @@
         android:text="Total Calories: "
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/bmi_calculator_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BMI Calculator"
+        />
+
+    <Button
+        android:id="@+id/workout_plan_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Workout Plan"
+        />
+
+
+
 </LinearLayout>
