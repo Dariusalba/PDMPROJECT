@@ -7,6 +7,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 
 class AddFoodActivity : AppCompatActivity() {
 
@@ -15,6 +21,7 @@ class AddFoodActivity : AppCompatActivity() {
     private lateinit var addMealButton: Button
     private lateinit var calculateCaloriesButton: Button
     private lateinit var caloriesResultTextView: TextView
+    private lateinit var caloriesChart: BarChart
 
     private val mealsList = mutableListOf<Pair<String, Float>>()
 
@@ -27,6 +34,7 @@ class AddFoodActivity : AppCompatActivity() {
         addMealButton = findViewById(R.id.add_meal_button)
         calculateCaloriesButton = findViewById(R.id.calculate_calories_button)
         caloriesResultTextView = findViewById(R.id.calories_result_text_view)
+        caloriesChart = findViewById(R.id.calories_chart)
 
         addMealButton.setOnClickListener {
             val foodName = foodNameEditText.text.toString()
@@ -36,6 +44,7 @@ class AddFoodActivity : AppCompatActivity() {
                 mealsList.add(Pair(foodName, foodAmount))
                 Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show()
                 clearInputFields()
+                updateCaloriesChart()
             } else {
                 Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
             }
@@ -46,7 +55,6 @@ class AddFoodActivity : AppCompatActivity() {
             val resultText = "Total Calories: $totalCalories"
             caloriesResultTextView.text = resultText
         }
-
 
         val bmiCalculatorButton: Button = findViewById(R.id.bmi_calculator_button)
         bmiCalculatorButton.setOnClickListener {
@@ -82,11 +90,41 @@ class AddFoodActivity : AppCompatActivity() {
             Toast.makeText(this, warningMessage, Toast.LENGTH_LONG).show()
         }
         return totalCalories
-
     }
 
     private fun clearInputFields() {
         foodNameEditText.text.clear()
         foodAmountEditText.text.clear()
+    }
+
+    private fun updateCaloriesChart() {
+        val barEntries = mutableListOf<BarEntry>()
+        var xAxisLabel = mutableListOf<String>()
+
+        for ((index, meal) in mealsList.withIndex()) {
+            val caloriesPer100g = 230
+            val calories = ((meal.second / 100) * caloriesPer100g).toInt()
+            barEntries.add(BarEntry(index.toFloat(), calories.toFloat()))
+            xAxisLabel.add(meal.first)
+        }
+
+        val barDataSet = BarDataSet(barEntries, "Calories Consumed")
+        val barData = BarData(barDataSet)
+
+        barDataSet.color = resources.getColor(R.color.colorAccent)
+        barData.barWidth = 0.5f
+
+        val xAxis = caloriesChart.xAxis
+        xAxis.valueFormatter = IndexAxisValueFormatter(xAxisLabel)
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.setDrawGridLines(false)
+        xAxis.granularity = 1f
+
+        caloriesChart.setTouchEnabled(false)
+        caloriesChart.isDragEnabled = false
+        caloriesChart.setScaleEnabled(false)
+
+        caloriesChart.data = barData
+        caloriesChart.invalidate()
     }
 }
